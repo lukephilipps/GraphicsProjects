@@ -1,0 +1,57 @@
+#pragma kernel CSMain
+#include "Simplex.compute"
+
+struct GrassInstance
+{
+    float3 position;
+    float height;
+};
+
+RWStructuredBuffer<GrassInstance> _GrassInstances;
+sampler2D _HeightMap;
+
+float _DisplaceStrength;
+float _Density;
+float3 _Center;
+int2 _Size;
+
+float random(float2 uv)
+{
+    return frac(sin(dot(uv,float2(12.9898,78.233)))*43758.5453123);
+}
+
+[numthreads(8,8,1)]
+void CSMain (uint3 id : SV_DispatchThreadID)
+{
+    // if (id.x < (uint)_Size.x && id.y < (uint)_Size.y)
+    if (id.x < (uint)(_Size.x * _Density) && id.y < (uint)(_Size.y * _Density))
+    {
+        float variance = snoise(float3(id.xy, 0.0f) * 4.0f) * 0.2f;
+
+        GrassInstance instance;
+
+        float3 pos = 0.0f;
+        pos.xz = id.xy;
+        pos.xz -= ((float2)(_Size * _Density) * 0.5f);
+        pos.xz /= _Density;
+        pos.xz += 0.5f;
+        pos.xz += variance;
+        pos += _Center;
+
+        float2 uv = id.xy + variance + 0.5f;
+        uv.x /= _Size.x * _Density;
+        uv.y /= _Size.y * _Density;
+        uv.x = 1 - uv.x;
+        uv.y = 1 - uv.y;
+
+        float displace = tex2Dlod(_HeightMap, float4(uv, 0, 0)).x * _DisplaceStrength * 100; // add 100 to account for scale of terrain
+        pos.y += displace;
+        pos.y += 0.47f; //account for quad size
+
+        instance.height = abs(snoise(float3(pos.xz, 0.0f) * 0.1f)) * 1.5f;
+
+        instance.position = pos;
+
+        _GrassInstances[id.x + id.y * _Size.x * _Density] = instance;
+    }
+}

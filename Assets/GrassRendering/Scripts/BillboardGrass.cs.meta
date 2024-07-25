@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: a6c00e48b7123a44db50dd52c8f5b923
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - material: {fileID: 2100000, guid: 3adbd4f5715a80c409535545bb40c1ba, type: 2}
+  - mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+  - computeGrassData: {fileID: 7200000, guid: bdf8e8734b42f6c4283171c1d774c51b, type: 3}
+  - heightMap: {fileID: 2800000, guid: 8825c9a930b855a4198b58ba227170e1, type: 3}
+  - grassTexture: {fileID: 2800000, guid: 97a0e04059b329647be131fd02fa0c3d, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
