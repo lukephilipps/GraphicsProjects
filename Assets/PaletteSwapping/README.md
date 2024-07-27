@@ -3,7 +3,7 @@
 A project supporting:
 * Image downscaling (pixelization)
 * Color quantizing
-* Palette swapping based on pixel luminance\
+* Palette swapping based on pixel luminance
 
 made for the Unity built in pipeline.
 
