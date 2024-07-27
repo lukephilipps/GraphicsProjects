@@ -10,7 +10,7 @@ Import the .unitypackage file into your scene and simply attach the DitherObstac
 Create a new layer, and set the script's Close Layer property to said layer. Objects in the scene should not use this layer.
 
 ## Screenshots
-### Undithered Obstructive Obstacle
+### Undithered Obstacle
 ![An undithered obstacle.](/DemoScreenshots/ObstacleUndithered.png)
-### Dithered Obstructive Obstacle
+### Dithered Obstacle
 ![The dithered obstacle.](/DemoScreenshots/ObstacleDithered.png)
