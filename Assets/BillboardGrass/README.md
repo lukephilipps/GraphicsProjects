@@ -5,5 +5,4 @@ A billboard grass implementation based on [Acerola's video on the topic](https:/
 ### Disclaimer
 This effect was made to be a demonstration of compute shaders, and as such isn't built for use in actual Unity projects at the moment. The terrain that the grass is rendered on lacks collider functionality meaning it couldn't be used in most scenarios.
 
-## Screenshots
 ![A field of grass swaying in the wind.](/DemoScreenshots/Grass.gif)
