@@ -90,6 +90,16 @@ public class DitherObstacles : MonoBehaviour
             }
         }
 
+        // Disable second camera if unneeded
+        if (closeObjects.Count == 0)
+        {
+            rtCamera.enabled = false;
+        }
+        else
+        {
+            rtCamera.enabled = true;
+        }
+
         if (screenWidth != Screen.width || screenHeight != Screen.height) ResizeRenderTexture();
     }
 
