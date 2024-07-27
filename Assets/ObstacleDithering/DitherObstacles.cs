@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class DitherObstacles : MonoBehaviour
 {
@@ -32,6 +33,7 @@ public class DitherObstacles : MonoBehaviour
     {
         Camera.onPreRender += OnPreRenderCallback;
         Camera.onPostRender += OnPostRenderCallback;
+        Camera.onPreCull += OnPreCullCallback;
 
         mainCamera = GetComponent<Camera>();
         mainCamera.cullingMask = mainCamera.cullingMask | (1 << closeLayer);
@@ -59,18 +61,13 @@ public class DitherObstacles : MonoBehaviour
     {
         Camera.onPreRender -= OnPreRenderCallback;
         Camera.onPostRender -= OnPostRenderCallback;
+        Camera.onPreCull -= OnPreCullCallback;
     }
 
     void Update()
     {
         // Reset previous hit materials
-        {
-            foreach(CloseObject closeObject in closeObjects)
-            {
-                closeObject.transform.gameObject.layer = closeObject.layer;
-            }
-            closeObjects.Clear();
-        }
+        closeObjects.Clear();
 
         // Raycast from camera to check for close objects
         {
@@ -85,7 +82,6 @@ public class DitherObstacles : MonoBehaviour
                 if (hitRenderer != null)
                 {
                     closeObjects.Add(new CloseObject(hitTransform, hitRenderer.material, hitTransform.gameObject.layer));
-                    hitTransform.gameObject.layer = closeLayer;
                 }
             }
         }
@@ -123,6 +119,24 @@ public class DitherObstacles : MonoBehaviour
             foreach (CloseObject closeObject in closeObjects)
             {
                 closeObject.transform.GetComponent<Renderer>().material = closeObject.material;
+            }
+        }
+        else if (cam == rtCamera)
+        {
+            foreach (CloseObject closeObject in closeObjects)
+            {
+                closeObject.transform.gameObject.layer = closeObject.layer;
+            }
+        }
+    }
+
+    void OnPreCullCallback(Camera cam)
+    {
+        if (cam == rtCamera)
+        {
+            foreach (CloseObject closeObject in closeObjects)
+            {
+                closeObject.transform.gameObject.layer = closeLayer;
             }
         }
     }
