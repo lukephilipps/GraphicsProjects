@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CullCloseObjects : MonoBehaviour
+public class DitherObstacles : MonoBehaviour
 {
     private struct CloseObject
     {

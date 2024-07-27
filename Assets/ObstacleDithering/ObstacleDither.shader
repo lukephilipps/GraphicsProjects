@@ -1,4 +1,4 @@
-Shader "Hidden/CloseDither"
+Shader "Hidden/ObstacleDither"
 {
     SubShader
     {

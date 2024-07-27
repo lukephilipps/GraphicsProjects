@@ -5,7 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/Imported/Fantasy Forest Environment Free Sample/Scenes/demoScene_free.unity
     guid: 7769f33fb4fa2e5458344a36556ad760
+  - enabled: 0
+    path: Assets/BillboardGrass/GrassScene.unity
+    guid: 5025221b08863204e8c326f263bf71f6
   m_configObjects: {}
